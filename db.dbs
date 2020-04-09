@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Task" id="Project_719df9" template="Default" database="PostgreSQL" >
+	<comment><![CDATA[task]]></comment>
+	<schema name="task" schemaname="task" >
+		<table name="department" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="date_create" type="date" jt="91" mandatory="y" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="pk_department_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="education" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="id_employee" type="integer" jt="4" mandatory="y" />
+			<column name="path_img" type="varchar" length="100" jt="12" />
+			<column name="type_education" type="integer" jt="4" mandatory="y" />
+			<column name="title" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="pk_education_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_education_employee" to_schema="task" to_table="employee" >
+				<fk_column name="id_employee" pk="id" />
+			</fk>
+			<fk name="fk_education_type_education" to_schema="task" to_table="type_education" >
+				<fk_column name="type_education" pk="id" />
+			</fk>
+		</table>
+		<table name="employee" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="family" type="varchar" length="60" jt="12" mandatory="y" />
+			<column name="birthday" type="date" jt="91" mandatory="y" />
+			<column name="patronymic" type="varchar" length="60" jt="12" />
+			<column name="gender" type="integer" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="60" jt="12" mandatory="y" />
+			<column name="phone" type="varchar" length="11" jt="12" mandatory="y" />
+			<column name="email" type="varchar" length="60" jt="12" mandatory="y" />
+			<column name="employment_date" type="date" jt="91" mandatory="y" />
+			<column name="dismosal_date" type="date" jt="91" />
+			<column name="position_employee" type="integer" jt="4" mandatory="y" />
+			<column name="salary" type="integer" jt="4" mandatory="y" />
+			<column name="head" type="bool" jt="-7" mandatory="y" />
+			<column name="line_manager" type="integer" jt="4" />
+			<column name="id_department" type="integer" jt="4" mandatory="y" />
+			<index name="pk_employe_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_employee_department" to_schema="task" to_table="department" >
+				<fk_column name="id_department" pk="id" />
+			</fk>
+			<fk name="fk_employee_position" to_schema="task" to_table="position" >
+				<fk_column name="position_employee" pk="id" />
+			</fk>
+			<fk name="fk_employee_employee" to_schema="task" to_table="employee" >
+				<fk_column name="line_manager" pk="id" />
+			</fk>
+		</table>
+		<table name="employee_to_proficiency_level" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="id_employee" type="integer" jt="4" mandatory="y" />
+			<column name="id_level" type="integer" jt="4" mandatory="y" />
+			<index name="pk_employee_to_proficiency_level_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_employee_to_proficiency_level_employee" to_schema="task" to_table="employee" >
+				<fk_column name="id_employee" pk="id" />
+			</fk>
+			<fk name="fk_employee_to_proficiency_level_proficiency_level" to_schema="task" to_table="proficiency_level" >
+				<fk_column name="id_level" pk="id" />
+			</fk>
+		</table>
+		<table name="foreign_language" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="pk_foreign_language_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="grade" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="pk_grade_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="position" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="unq_position_id" unique="UNIQUE" >
+				<column name="id" />
+			</index>
+			<index name="pk_position_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="proficiency_level" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="id_language" type="integer" jt="4" mandatory="y" />
+			<index name="pk_proficiency_level_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_proficiency_level_foreign_language" to_schema="task" to_table="foreign_language" >
+				<fk_column name="id_language" pk="id" />
+			</fk>
+		</table>
+		<table name="project" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="id_manager" type="integer" jt="4" mandatory="y" />
+			<column name="name_project" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="pk_poject_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_poject_employee" to_schema="task" to_table="employee" >
+				<fk_column name="id_manager" pk="id" />
+			</fk>
+		</table>
+		<table name="role" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="employee_id" type="integer" jt="4" mandatory="y" />
+			<column name="id_grade" type="integer" jt="4" mandatory="y" />
+			<column name="id_position" type="integer" jt="4" mandatory="y" />
+			<column name="id_specialization" type="integer" jt="4" mandatory="y" />
+			<index name="pk_role_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_role_grade" to_schema="task" to_table="grade" >
+				<fk_column name="id_grade" pk="id" />
+			</fk>
+			<fk name="fk_role_position" to_schema="task" to_table="position" >
+				<fk_column name="id_position" pk="id" />
+			</fk>
+			<fk name="fk_role_specialization" to_schema="task" to_table="specialization" >
+				<fk_column name="id_specialization" pk="id" />
+			</fk>
+		</table>
+		<table name="specialization" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="pk_specialization_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="type_education" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="title" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="unq_type_education_id" unique="UNIQUE" >
+				<column name="id" />
+			</index>
+			<index name="pk_type_education_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="work_experience" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="id_employee" type="integer" jt="4" mandatory="y" />
+			<column name="data_reciept" type="date" jt="91" mandatory="y" />
+			<column name="date_dismossal" type="date" jt="91" />
+			<column name="name_of_company" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="name_position" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="pk_work_experience_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_work_experience_employee" to_schema="task" to_table="employee" >
+				<fk_column name="id_employee" pk="id" />
+			</fk>
+		</table>
+		<table name="work_experience_in_company" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="date_start" type="date" jt="91" mandatory="y" />
+			<column name="date_end" type="date" jt="91" />
+			<column name="id_project" type="integer" jt="4" mandatory="y" />
+			<column name="id_employee" type="integer" jt="4" mandatory="y" />
+			<column name="role" type="integer" length="100" jt="4" mandatory="y" />
+			<index name="pk_work_experience_in_company_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_work_experience_in_company_poject" to_schema="task" to_table="project" >
+				<fk_column name="id_project" pk="id" />
+			</fk>
+			<fk name="fk_work_experience_in_company_employee" to_schema="task" to_table="employee" >
+				<fk_column name="id_employee" pk="id" />
+			</fk>
+			<fk name="fk_work_experience_in_company_role" to_schema="task" to_table="role" >
+				<fk_column name="role" pk="id" />
+			</fk>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout_5305ec4" show_relation="columns" >
+		<entity schema="task" name="employee_to_proficiency_level" color="C1D8EE" x="48" y="304" />
+		<entity schema="task" name="department" color="C1D8EE" x="80" y="96" />
+		<entity schema="task" name="proficiency_level" color="C1D8EE" x="96" y="448" />
+		<entity schema="task" name="work_experience" color="C1D8EE" x="752" y="64" />
+		<entity schema="task" name="education" color="C1D8EE" x="960" y="272" />
+		<entity schema="task" name="foreign_language" color="C1D8EE" x="96" y="576" />
+		<entity schema="task" name="work_experience_in_company" color="C1D8EE" x="384" y="560" />
+		<entity schema="task" name="role" color="C1D8EE" x="656" y="544" />
+		<entity schema="task" name="position" color="C1D8EE" x="800" y="352" />
+		<entity schema="task" name="grade" color="C1D8EE" x="880" y="592" />
+		<entity schema="task" name="type_education" color="C1D8EE" x="1248" y="288" />
+		<entity schema="task" name="employee" color="C1D8EE" x="448" y="48" />
+		<entity schema="task" name="project" color="C1D8EE" x="560" y="416" />
+		<entity schema="task" name="specialization" color="C1D8EE" x="736" y="768" />
+	</layout>
+</project>
