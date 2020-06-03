@@ -12,24 +12,102 @@ plugins {
 
     // Apply the application plugin to add support for building a CLI application.
     id 'application'
+//    apply plugin: 'application'
+
+    id "org.flywaydb.flyway" version "6.3.3"
+
+
+    id 'org.springframework.boot' version '2.0.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.7.RELEASE'
 }
 
+apply plugin : "java"
+
 repositories {
-    // Use jcenter for resolving dependencies.
-    // You can declare any Maven/Ivy/file repository here.
     jcenter()
 }
 
 dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:28.2-jre'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
+    compile group: 'org.mybatis', name: 'mybatis', version: '3.2.2'
+
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.1'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
     implementation 'junit:junit:4.12'
+
+    implementation 'org.springframework.boot:spring-boot-dependencies:2.0.5.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    components {
+        withModule('org.springframework:spring-beans') {
+            allVariants {
+                withDependencyConstraints {
+                    // Need to patch constraints because snakeyaml is an optional dependency
+                    it.findAll { it.name == 'snakeyaml' }.each { it.version { strictly '1.19' } }
+                }
+            }
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "TestTask.App"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+bootRun {
+    jvmArgs = ["-agentlib:jdwp=transport=dt_socket,server=y,address=8000,suspend=n"]
+}
+bootJar {
+    mainClassName = 'TestTask.App'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 application {
     // Define the main class for the application.
     mainClassName = 'TestTask.App'
+}
+
+run {
+    jvmArgs "-Dagentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+//    debug true
+}
+
+bootRun {
+    systemProperties = System.properties
+}
+
+
+//run {
+//    debug true
+//}
+
+flyway {
+    url = 'jdbc:postgresql://localhost:5433/task'
+    locations = ['filesystem:src/main/resources/db/migration']
+    user = 'user'
+    password = 'secret'
+    schemas = ['task']
 }

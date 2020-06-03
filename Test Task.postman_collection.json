@@ -1,0 +1,51 @@
+{
+	"info": {
+		"_postman_id": "5331eb53-31aa-4280-88b6-ca56fbc5ee0f",
+		"name": "Test Task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Сотрудник по id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Получение сущности сотрудника"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f4715c84-d5c2-439c-928e-cd3a70708aa7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "37573e56-2e20-4453-b10a-6844f733925e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "645176d0-1420-4bb5-94fe-3ee67b6767d0",
+			"key": "base_url",
+			"value": "http://localhost:8083",
+			"type": "string"
+		}
+	]
+}

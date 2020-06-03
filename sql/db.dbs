@@ -2,7 +2,7 @@
 <project name="Task" id="Project_719df9" template="Default" database="PostgreSQL" >
 	<comment><![CDATA[task]]></comment>
 	<schema name="task" schemaname="task" >
-		<table name="department" >
+		<table name="department" generator_rows="100" >
 			<column name="id" type="integer" jt="4" mandatory="y" />
 			<column name="date_create" type="date" jt="91" mandatory="y" />
 			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
@@ -10,7 +10,7 @@
 				<column name="id" />
 			</index>
 		</table>
-		<table name="education" >
+		<table name="education" generator_rows="337" >
 			<column name="id" type="integer" jt="4" mandatory="y" />
 			<column name="id_employee" type="integer" jt="4" mandatory="y" />
 			<column name="path_img" type="varchar" length="100" jt="12" />
@@ -26,7 +26,7 @@
 				<fk_column name="type_education" pk="id" />
 			</fk>
 		</table>
-		<table name="employee" >
+		<table name="employee" generator_rows="225" >
 			<column name="id" type="integer" jt="4" mandatory="y" />
 			<column name="family" type="varchar" length="60" jt="12" mandatory="y" />
 			<column name="birthday" type="date" jt="91" mandatory="y" />
@@ -55,7 +55,7 @@
 				<fk_column name="line_manager" pk="id" />
 			</fk>
 		</table>
-		<table name="employee_to_proficiency_level" >
+		<table name="employee_to_proficiency_level" generator_rows="337" >
 			<column name="id" type="integer" jt="4" mandatory="y" />
 			<column name="id_employee" type="integer" jt="4" mandatory="y" />
 			<column name="id_level" type="integer" jt="4" mandatory="y" />
@@ -69,21 +69,21 @@
 				<fk_column name="id_level" pk="id" />
 			</fk>
 		</table>
-		<table name="foreign_language" >
+		<table name="foreign_language" generator_rows="100" >
 			<column name="id" type="integer" jt="4" mandatory="y" />
 			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
 			<index name="pk_foreign_language_id" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
-		<table name="grade" >
+		<table name="grade" generator_rows="100" >
 			<column name="id" type="integer" jt="4" mandatory="y" />
 			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
 			<index name="pk_grade_id" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
-		<table name="position" >
+		<table name="position" generator_rows="100" >
 			<column name="id" type="integer" jt="4" mandatory="y" />
 			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
 			<index name="unq_position_id" unique="UNIQUE" >
@@ -93,7 +93,7 @@
 				<column name="id" />
 			</index>
 		</table>
-		<table name="proficiency_level" >
+		<table name="proficiency_level" generator_rows="150" >
 			<column name="id" type="integer" jt="4" mandatory="y" />
 			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="id_language" type="integer" jt="4" mandatory="y" />
@@ -104,7 +104,7 @@
 				<fk_column name="id_language" pk="id" />
 			</fk>
 		</table>
-		<table name="project" >
+		<table name="project" generator_rows="337" >
 			<column name="id" type="integer" jt="4" mandatory="y" />
 			<column name="id_manager" type="integer" jt="4" mandatory="y" />
 			<column name="name_project" type="varchar" length="100" jt="12" mandatory="y" />
@@ -115,7 +115,7 @@
 				<fk_column name="id_manager" pk="id" />
 			</fk>
 		</table>
-		<table name="role" >
+		<table name="role" generator_rows="150" >
 			<column name="id" type="integer" jt="4" mandatory="y" />
 			<column name="employee_id" type="integer" jt="4" mandatory="y" />
 			<column name="id_grade" type="integer" jt="4" mandatory="y" />
@@ -134,14 +134,14 @@
 				<fk_column name="id_specialization" pk="id" />
 			</fk>
 		</table>
-		<table name="specialization" >
+		<table name="specialization" generator_rows="100" >
 			<column name="id" type="integer" jt="4" mandatory="y" />
 			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
 			<index name="pk_specialization_id" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
-		<table name="type_education" >
+		<table name="type_education" generator_rows="100" >
 			<column name="id" type="integer" jt="4" mandatory="y" />
 			<column name="title" type="varchar" length="100" jt="12" mandatory="y" />
 			<index name="unq_type_education_id" unique="UNIQUE" >
@@ -151,7 +151,7 @@
 				<column name="id" />
 			</index>
 		</table>
-		<table name="work_experience" >
+		<table name="work_experience" generator_rows="337" >
 			<column name="id" type="integer" jt="4" mandatory="y" />
 			<column name="id_employee" type="integer" jt="4" mandatory="y" />
 			<column name="data_reciept" type="date" jt="91" mandatory="y" />
@@ -165,7 +165,7 @@
 				<fk_column name="id_employee" pk="id" />
 			</fk>
 		</table>
-		<table name="work_experience_in_company" >
+		<table name="work_experience_in_company" generator_rows="505" >
 			<column name="id" type="integer" jt="4" mandatory="y" />
 			<column name="date_start" type="date" jt="91" mandatory="y" />
 			<column name="date_end" type="date" jt="91" />
@@ -186,6 +186,7 @@
 			</fk>
 		</table>
 	</schema>
+	<connector name="" database="MySql" host="localhost" port="3306" user="root" />
 	<layout name="Default Layout" id="Layout_5305ec4" show_relation="columns" >
 		<entity schema="task" name="employee_to_proficiency_level" color="C1D8EE" x="48" y="304" />
 		<entity schema="task" name="department" color="C1D8EE" x="80" y="96" />
@@ -201,5 +202,20 @@
 		<entity schema="task" name="employee" color="C1D8EE" x="448" y="48" />
 		<entity schema="task" name="project" color="C1D8EE" x="560" y="416" />
 		<entity schema="task" name="specialization" color="C1D8EE" x="736" y="768" />
+		<script name="education" id="Editor_3f60a02" language="SQL" >
+			<string><![CDATA[CREATE TABLE task.education ( 
+	id                   integer  NOT NULL ,
+	id_employee          integer  NOT NULL ,
+	path_img             varchar(100)   ,
+	type_education       integer  NOT NULL ,
+	title                varchar(100)  NOT NULL ,
+	CONSTRAINT pk_education_id PRIMARY KEY ( id )
+ );
+
+ALTER TABLE task.education ADD CONSTRAINT fk_education_employee FOREIGN KEY ( id_employee ) REFERENCES task.employee( id );
+
+ALTER TABLE task.education ADD CONSTRAINT fk_education_type_education FOREIGN KEY ( type_education ) REFERENCES task.type_education( id );
+]]></string>
+		</script>
 	</layout>
 </project>
