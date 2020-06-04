@@ -10,15 +10,20 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.context.annotation.Bean;
 
 
 import java.io.IOException;
 import java.io.Reader;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 
 @SpringBootApplication
 public class App {
+
+
     public String getGreeting() {
         return "Hello world.";
     }
@@ -28,7 +33,10 @@ public class App {
 //        SpringApplication.run(App.class, args);
         app.setDefaultProperties(Collections
                 .singletonMap("server.port", "8083"));
+
+
         app.run(args);
+
 //        SqlSessionFactory sqlSessionFactory;
 //        EmployeeMapper subscriberMapper;
 //        Reader reader = null;

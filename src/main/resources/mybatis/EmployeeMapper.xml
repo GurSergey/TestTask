@@ -6,7 +6,4 @@
     select * from task.employee where id = #{id}
     </select>
 
-<!--    <select id="getEmployees">-->
-<!--        select * from task.employee-->
-<!--    </select>-->
 </mapper>

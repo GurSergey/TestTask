@@ -1,0 +1,2 @@
+spring.datasource.url= jdbc:postgresql://localhost:5433/task
+spring.datasource.username=user spring.datasource.password=postgres@secret
