@@ -1,2 +1,2 @@
 # TestTask
-![Image](../blob/master/white.png)
+![Image](../master/white.png)
