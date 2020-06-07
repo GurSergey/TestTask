@@ -1,3 +1,3 @@
 # TestTask
-![Image](../master/white.png)
+![Image](../master/logo.png)
 Просто тестовое задание
