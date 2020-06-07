@@ -5,7 +5,8 @@ import TestTask.output.EmployeeStructs;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface EmployeeMapper {
+public interface EmployeeOutputMapper {
+    EmployeeStructs[] sourceToDestination(Employee[] employee);
     EmployeeStructs sourceToDestination(Employee employee);
     Employee destinationToSource(EmployeeStructs destination);
 }

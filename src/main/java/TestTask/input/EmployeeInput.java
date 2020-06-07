@@ -1,5 +1,7 @@
 package TestTask.input;
 
+import TestTask.entities.Department;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,4 +30,17 @@ public class EmployeeInput {
     @NotEmpty(message = "email is mandatory")
     @Email(message="Please provide a valid email address")
     @Getter @Setter private String email;
+
+    @NotNull(message = "Birthday is mandatory")
+    @Getter @Setter
+    private Date employmentDate;
+    @NotNull(message = "salary is mandatory")
+    @Getter @Setter
+    Integer salary;
+    @NotNull(message = "head is mandatory")
+    @Getter @Setter
+    Boolean head;
+    @NotNull(message = "id_department is mandatory")
+    @Getter @Setter
+    Department department;
 }

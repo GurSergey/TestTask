@@ -5,5 +5,16 @@
     parameterType="java.lang.Integer" resultType="TestTask.entities.Employee">
     select * from task.employee where id = #{id}
     </select>
-
+    <select
+            id="getEmployeeByFamilyPattern"
+            parameterType="java.lang.String" resultType="TestTask.entities.Employee">
+    select * from task.employee where family LIKE   '%'||#{familyPattern} || '%'
+    </select>
+    <insert id="addEmployee"
+            parameterType="TestTask.entities.Employee" >
+        insert into task.employee(family, birthday, patronymic, gender, name, phone, email,
+        employment_date, salary, head, id_department)
+        values (#{family}, #{birthday}, #{patronymic}, #{gender}, #{name}, #{phone}, #{email},
+        #{employmentDate}, #{salary}, #{head}, #{department.id})
+    </insert>
 </mapper>

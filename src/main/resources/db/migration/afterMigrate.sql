@@ -59,3 +59,22 @@ INSERT INTO task.work_experience_in_company VALUES (1, '2007-12-17', '2008-12-17
 
 INSERT INTO task.education VALUES (1, 1, null, 1, 'Диплом инженера по вычислительной технике'),
 (2, 1, null, 2, 'Диплом разработчика ...');
+
+
+CREATE SEQUENCE task.department_id_seq MINVALUE 10
+CREATE SEQUENCE task.foreign_language_id_seq MINVALUE 10
+CREATE SEQUENCE task.grade_id_seq MINVALUE 10
+CREATE SEQUENCE task.proficiency_level_id_seq MINVALUE 10
+CREATE SEQUENCE task.specialization_id_seq MINVALUE 10
+CREATE SEQUENCE task.type_education_id_seq MINVALUE 10
+CREATE SEQUENCE task.employee_id_seq MINVALUE 10
+CREATE SEQUENCE task.employee_to_proficiency_level_id_seq MINVALUE 10
+CREATE SEQUENCE task.project_id_seq MINVALUE 10
+CREATE SEQUENCE task.role_id_seq MINVALUE 10
+CREATE SEQUENCE task.work_experience_id_seq MINVALUE 10
+CREATE SEQUENCE task.work_experience_in_company_id_seq MINVALUE 10
+CREATE SEQUENCE task.work_experience_in_company_id_seq MINVALUE 10
+ALTER TABLE task.department ALTER id SET DEFAULT nextval('department_id_seq')
+ALTER TABLE task.foreign_language ALTER id SET DEFAULT nextval('foreign_language_id_seq')
+ALTER TABLE task.grade ALTER id SET DEFAULT nextval('grade_id_seq')
+ALTER TABLE task.employee ALTER id SET DEFAULT nextval('task.employee_id_seq')

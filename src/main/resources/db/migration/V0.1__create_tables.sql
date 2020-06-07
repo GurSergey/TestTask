@@ -147,3 +147,25 @@ ALTER TABLE task.work_experience_in_company ADD CONSTRAINT fk_work_experience_in
 ALTER TABLE task.work_experience_in_company ADD CONSTRAINT fk_work_experience_in_company_employee FOREIGN KEY ( id_employee ) REFERENCES task.employee( id );
 
 ALTER TABLE task.work_experience_in_company ADD CONSTRAINT fk_work_experience_in_company_role FOREIGN KEY ( "role" ) REFERENCES task."role"( id );
+
+
+CREATE SEQUENCE task.department_id_seq MINVALUE 10
+CREATE SEQUENCE task.foreign_language_id_seq MINVALUE 10
+CREATE SEQUENCE task.grade_id_seq MINVALUE 10
+CREATE SEQUENCE task.proficiency_level_id_seq MINVALUE 10
+CREATE SEQUENCE task.specialization_id_seq MINVALUE 10
+CREATE SEQUENCE task.type_education_id_seq MINVALUE 10
+CREATE SEQUENCE task.employee_id_seq MINVALUE 10
+CREATE SEQUENCE task.employee_to_proficiency_level_id_seq MINVALUE 10
+CREATE SEQUENCE task.project_id_seq MINVALUE 10
+CREATE SEQUENCE task.role_id_seq MINVALUE 10
+CREATE SEQUENCE task.work_experience_id_seq MINVALUE 10
+CREATE SEQUENCE task.work_experience_in_company_id_seq MINVALUE 10
+CREATE SEQUENCE task.work_experience_in_company_id_seq MINVALUE 10
+ALTER TABLE task.department ALTER id SET DEFAULT nextval('department_id_seq')
+ALTER TABLE task.foreign_language ALTER id SET DEFAULT nextval('foreign_language_id_seq')
+ALTER TABLE task.grade ALTER id SET DEFAULT nextval('grade_id_seq')
+ALTER TABLE task.employee ALTER id SET DEFAULT nextval('task.employee_id_seq')
+
+CREATE EXTENSION pg_trgm;
+CREATE INDEX trgm_idx_employee_family ON task.employee USING gin (family gin_trgm_ops);

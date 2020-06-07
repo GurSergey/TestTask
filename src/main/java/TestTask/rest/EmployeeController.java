@@ -2,7 +2,8 @@ package TestTask.rest;
 
 
 import TestTask.exception.IdNotFound;
-import TestTask.mappers.EmployeeMapper;
+import TestTask.mappers.EmployeeInputMapper;
+import TestTask.mappers.EmployeeOutputMapper;
 import TestTask.output.EmployeeStructs;
 import TestTask.input.EmployeeInput;
 import io.swagger.annotations.Api;
@@ -21,20 +22,29 @@ public class EmployeeController {
     @Autowired
     EmployeeDTO dto;
     @Autowired
-    EmployeeMapper employeeMapper;
+    EmployeeOutputMapper employeeOutputMapper;
+    @Autowired
+    EmployeeInputMapper employeeInputMapper;
 
     @GetMapping("/get_employee")
     @ApiOperation(value = "Get employee by id")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 404, message = "Not found id")
     })
-    public EmployeeStructs greeting(@RequestParam(value = "id") int id) throws IdNotFound {
-        return employeeMapper.sourceToDestination( dto.getEmployee(id));
+    public EmployeeStructs getEmployee(@RequestParam(value = "id") int id) throws IdNotFound {
+        return employeeOutputMapper.sourceToDestination( dto.getEmployee(id));
     }
 
-    @PostMapping("/add_employee")
-    ResponseEntity<String> addUser(@Valid @RequestBody EmployeeInput user) {
+    @GetMapping("/search_employee")
+    public EmployeeStructs[] searchEmployeeByFamily
+            (@RequestParam(value = "familyPattern") String pattern) {
+        return employeeOutputMapper.sourceToDestination( dto.searchEmployeeByPatternFamily(pattern));
+    }
 
+    @ApiOperation(value = "Add employee")
+    @PostMapping("/add_employee")
+    ResponseEntity<String> addUser(@Valid @RequestBody EmployeeInput employee) {
+        dto.addEmployee(employeeInputMapper.sourceToDestination(employee));
         return ResponseEntity.ok("User added");
     }
 }
