@@ -1,2 +1,2 @@
 # TestTask
-[GitHub](http://github.com)
+![Image](../blob/master/myimage.png?raw=true)
