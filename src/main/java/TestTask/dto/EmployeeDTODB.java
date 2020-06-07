@@ -35,6 +35,18 @@ public class EmployeeDTODB extends DTODB  implements EmployeeDTO   {
         }
     }
 
+    @Override
+    public Employee[] getAllEmployees() {
+        Employee[] employees = null;
+        try(SqlSession session = getSession()) {
+            employees = session.getMapper(EmployeeMapper.class).getAllEmployees();
+            return employees;
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return employees;
+    }
+
     public Employee[] searchEmployeeByPatternFamily(String pattern){
         Employee[] employees = null;
         try(SqlSession session = getSession()) {

@@ -1,6 +1,7 @@
 package TestTask.rest;
 
 
+import TestTask.entities.Employee;
 import TestTask.exception.IdNotFound;
 import TestTask.mappers.EmployeeInputMapper;
 import TestTask.mappers.EmployeeOutputMapper;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.PagedResources;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +41,13 @@ public class EmployeeController {
     public EmployeeStructs[] searchEmployeeByFamily
             (@RequestParam(value = "familyPattern") String pattern) {
         return employeeOutputMapper.sourceToDestination( dto.searchEmployeeByPatternFamily(pattern));
+    }
+
+    @GetMapping("/get_all_employee")
+    public ResponseEntity<PagedResources<EmployeeStructs>>  getAll
+            (@RequestParam(value = "familyPattern") String pattern) {
+        Page<AlbumEntity> albumEntities = albumRepository.findAll(pageable);
+        return employeeOutputMapper.sourceToDestination( dto.getAllEmployees());
     }
 
     @ApiOperation(value = "Add employee")
