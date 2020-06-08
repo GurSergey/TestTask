@@ -36,9 +36,7 @@ public class RestResponseEntityExceptionHandler
     protected ResponseEntity<Object> handleNotFound(
             RestException ex, WebRequest request) {
         return new ResponseEntity<>(ex.getText(), HttpStatus.NOT_FOUND);
-        //return 123;
-//        return handleExceptionInternal(ex, ex.getText(),
-//                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
